@@ -10,33 +10,26 @@
     
     <!-- Mode, Receipt No, Date, Seva Date Group -->
     <div class="form-inline">
-      <!-- <div class="mode">
-        <label for="mode">Mode</label>
-        <select id="mode" class="input-box" name="Mode" ngModel required>
-          <option value="" disabled selected>Select Mode</option>
-          <option *ngFor="let mode of modes" [value]="mode">{{ mode }}</option>
-        </select>
-      </div> -->
 
       <div class="receiptNo">
         <label for="receiptNo">Receipt No</label>
         <input id="receiptNo" class="input-box" type="text" name="receiptNo" placeholder="Receipt No" [(ngModel)]="receiptNo" required readonly>
-    </div>    
+     </div>    
     
       <div class="phoneNo">
         <label for="phoneNo">Mobile No <span class="mandatory-star">*</span></label>
         <input id="phoneNo" class="input-box" type="tel" name="phoneNo" placeholder="PhoneNo" ngModel required pattern="[0-9]{10}" maxlength="10" numbersOnly>
-    </div>
+      </div>
     
-    <div class="firstName">
+     <div class="firstName">
         <label for="firstName">First Name <span class="mandatory-star">*</span></label>
         <input id="firstName" class="input-box" type="text" name="First Name" placeholder="First Name" ngModel required>
-    </div>
+     </div>
     
-    <div class="lastName">
+     <div class="lastName">
         <label for="lastName">Last Name <span class="mandatory-star">*</span></label>
         <input id="lastName" class="input-box" type="text" name="Last Name" placeholder="Last Name" ngModel required>
-    </div>
+     </div>
     
     </div>
 
@@ -77,7 +70,7 @@
             <option value="" disabled selected>Select Nakshtram</option>
             <option *ngFor="let nakshtram of nakshtrams" [value]="nakshtram">{{ nakshtram }}</option>
         </select>
-    </div>    
+     </div>    
 
       <div class="raasi">
         <label for="raasi">Raasi <span class="mandatory-star">*</span></label>
@@ -85,7 +78,7 @@
             <option value="" disabled selected>Select Raasi</option>
             <option *ngFor="let raasi of raasis" [value]="raasi">{{ raasi }}</option>
         </select>
-    </div>
+     </div>
     
       <div class="modeofpayment">
         <label for="modeofpayment">Mode of Payment <span class="mandatory-star">*</span></label>
@@ -93,8 +86,7 @@
             <option value="" disabled selected>Select Mode of Payment</option>
             <option *ngFor="let mode of paymentModes" [value]="mode">{{ mode }}</option>
         </select>
-    </div>
-    
+     </div>   
     </div>
 
    <!-- Seva Details Group -->
@@ -124,7 +116,8 @@
         </div>
 
         <div class="date">
-          <input id="date{{i}}" class="input-box" type="date" name="date{{i}}" ngModel required>
+          <input id="date{{i}}" class="input-box" type="date" name="date{{i}}" 
+                 [(ngModel)]="sevaDetail.sevaDate" required>
         </div>
 
         <div class="total">

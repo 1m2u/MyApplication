@@ -160,24 +160,84 @@ export class AppComponent implements OnInit {
       0
     );
   }
-
-
-  
   onClickSubmit(formValue: any): void {
-    console.log('Form submitted:', formValue);
-    console.log('Seva Details:', this.sevaDetailsArray);
     this.submitted = true;
-    
-    // Create the complete form data object
-    const formData = {
-      ...formValue,
-      sevaDetails: this.sevaDetailsArray,
-      grandTotal: this.grandTotal
-    };
-
-    // You can add your form submission logic here
-    console.log('Complete form data:', formData);
-  }
-
   
+    // Prepare the data for multiple sevas
+    const formData = this.sevaDetailsArray.map((seva, index) => ({
+      receipt_no: this.receiptNo,
+      mobile_no: formValue.phoneNo,
+      first_name: formValue["First Name"],
+      last_name: formValue["Last Name"],
+      address_line1: formValue["Address Line 1"],
+      address_line2: formValue["Address Line 2"],
+      occasion: formValue.Occasion,
+      gotram: formValue.gotram,
+      nakshtram: formValue.nakshtram,
+      raasi: formValue.raasi,
+      payment_mode: formValue.Mode,
+      seva_name: seva.sevaName,
+      seva_date: seva.sevaDate,
+      amount: seva.amount
+    }));
+  console.log('formData--',formData)
+    this.appService.submitMultipleSevaData(formData).subscribe({
+      next: (response) => { 
+        console.log('Form saved successfully:', response);
+        alert('Form submitted successfully!');
+        this.hardReset();
+        this.getReceiptNo();
+      },
+      error: (error) => {
+        console.error('Error saving form:', error);
+        alert('Error submitting form. Please try again.');
+      }
+    });
+  }
+  hardReset(): void {
+    window.location.reload();
+  }
+// onClickSubmit(formValue: any): void {
+//   console.log('Form submitted:', formValue);
+//   this.submitted = true;
+
+//   // Prepare the form data for each seva in sevaDetailsArray
+//   const formDataArray = this.sevaDetailsArray.map(seva => {
+//     return {
+//       receipt_no: parseInt(this.receiptNo),
+//       mobile_no: formValue.phoneNo,
+//       first_name: formValue["First Name"] || '',
+//       last_name: formValue["Last Name"] || '',
+//       address_line1: formValue["Address Line 1"] || '',
+//       address_line2: formValue["Address Line 2"] || '',
+//       occasion: formValue.Occasion || '',
+//       gotram: formValue.gotram || '',
+//       nakshtram: formValue.nakshtram || '',
+//       raasi: formValue.raasi || '',
+//       payment_mode: formValue.Mode || '',
+//       seva_name: seva.sevaName,
+//       seva_date: seva.sevaDate,
+//       amount: seva.amount
+//     };
+//   });
+
+//   console.log('Sending data:', formDataArray);
+
+//   // Send an array of form data (one for each seva)
+//   this.appService.submitSevaData(formDataArray).subscribe({
+//     next: (response: any) => {
+//       console.log('Form saved successfully:', response);
+//       alert('Form submitted successfully! Receipt No: ' + this.receiptNo);
+
+//       // Optionally handle printing the receipt or resetting the form
+//       // this.printReceipt();
+//       // this.resetForm();
+//     },
+//     error: (error: any) => {
+//       console.error('Error saving form:', error);
+//       alert('Error submitting form. Please try again.');
+//     }
+//   });
+// }
+
 }
