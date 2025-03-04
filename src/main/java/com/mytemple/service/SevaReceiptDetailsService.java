@@ -1,7 +1,10 @@
 package com.mytemple.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mytemple.entity.SevaReceiptDetails;
 import com.mytemple.repository.SevaReceiptDetailsRepository;
@@ -14,6 +17,10 @@ public class SevaReceiptDetailsService {
 	
 	public SevaReceiptDetails saveReceiptDetails(SevaReceiptDetails receiptDetails) {
         return sevaReceiptDetailsRepository.save(receiptDetails);
+    }
+	@Transactional
+    public void saveSevaData(List<SevaReceiptDetails> sevaDataList) {
+		sevaReceiptDetailsRepository.saveAll(sevaDataList);
     }
 	
 	public String getLatestReceiptNumber() {
@@ -29,6 +36,8 @@ public class SevaReceiptDetailsService {
 	        return String.valueOf(latestReceiptNo); // Return incremented number as string
 	    }
 	}
+	
+	
 
 	    
 	

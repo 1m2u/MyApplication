@@ -1,11 +1,13 @@
 package com.mytemple.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +19,7 @@ import com.mytemple.entity.GotramNameDTO;
 import com.mytemple.entity.Occasion;
 import com.mytemple.entity.SevaDetails;
 import com.mytemple.entity.SevaReceiptDetails;
+import com.mytemple.entity.SevaRequestData;
 import com.mytemple.repository.SevaReceiptDetailsRepository;
 import com.mytemple.service.GotramService;
 import com.mytemple.service.OccasionService;
@@ -57,9 +60,10 @@ public class TempleController {
    
    @PostMapping("/sevareceipt")
    public ResponseEntity<SevaReceiptDetails> addSevaReceiptDetails(@RequestBody SevaReceiptDetails receiptDetails) {
+	   System.out.println(receiptDetails.toString());
        SevaReceiptDetails savedDetails = sevaReceiptDetailsService.saveReceiptDetails(receiptDetails);
        return ResponseEntity.ok(savedDetails);
-   }
+   }   
    
    @GetMapping("/receiptno")
    public ResponseEntity<Map<String, String>> getLatestReceiptNumber() {

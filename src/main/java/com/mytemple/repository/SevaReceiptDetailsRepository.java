@@ -10,4 +10,6 @@ public interface SevaReceiptDetailsRepository extends JpaRepository<SevaReceiptD
 
     @Query(value = "SELECT receipt_no FROM t_seva_receipt_details ORDER BY receipt_no DESC LIMIT 1", nativeQuery = true)
     Long findLatestReceiptNumber();
+    
+    
 }

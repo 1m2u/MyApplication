@@ -19,7 +19,7 @@ public class SevaReceiptDetails {
     private Integer id;
 	
    @Column(name="receipt_no")
-   private Long receipt_no;
+   private String receipt_no;
    
    @Column(name="mobile_no")
    private String mobile_no;
@@ -58,13 +58,13 @@ public class SevaReceiptDetails {
    private String seva_date;
    
    @Column(name="amount")
-   private Double amount;
+   private String amount;
 
 public SevaReceiptDetails() {}
 
-public SevaReceiptDetails(int id, Long receipt_no, String mobile_no, String first_name, String last_name,
+public SevaReceiptDetails(int id, String receipt_no, String mobile_no, String first_name, String last_name,
 		String address_line1, String address_line2, String occasion, String gotram, String nakshtram, String raasi,
-		String payment_mode, String seva_name, String seva_date, Double amount) {
+		String payment_mode, String seva_name, String seva_date, String amount) {
 	super();
 	this.id = id;
 	this.receipt_no = receipt_no;
@@ -91,11 +91,11 @@ public void setId(int id) {
 	this.id = id;
 }
 
-public Long getReceipt_no() {
+public String getReceipt_no() {
 	return receipt_no;
 }
 
-public void setReceipt_no(Long receipt_no) {
+public void setReceipt_no(String receipt_no) {
 	this.receipt_no = receipt_no;
 }
 
@@ -195,11 +195,11 @@ public void setSeva_date(String seva_date) {
 	this.seva_date = seva_date;
 }
 
-public Double getAmount() {
+public String getAmount() {
 	return amount;
 }
 
-public void setAmount(Double amount) {
+public void setAmount(String amount) {
 	this.amount = amount;
 }
 
