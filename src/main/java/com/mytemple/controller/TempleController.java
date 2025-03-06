@@ -1,15 +1,14 @@
 package com.mytemple.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +18,6 @@ import com.mytemple.entity.GotramNameDTO;
 import com.mytemple.entity.Occasion;
 import com.mytemple.entity.SevaDetails;
 import com.mytemple.entity.SevaReceiptDetails;
-import com.mytemple.entity.SevaRequestData;
 import com.mytemple.repository.SevaReceiptDetailsRepository;
 import com.mytemple.service.GotramService;
 import com.mytemple.service.OccasionService;
@@ -72,6 +70,16 @@ public class TempleController {
        response.put("receiptNo", latestReceiptNo); 
        return ResponseEntity.ok(response);
    }
-
-
+   @GetMapping("/lookup/{mobileNo}")
+   public ResponseEntity<SevaReceiptDetails> lookupByMobile(@PathVariable String mobileNo) {
+       SevaReceiptDetails devotee = sevaReceiptDetailsService.findByMobileNumber(mobileNo);
+       
+       if (devotee != null) {
+           // Return the found record with 200 OK status
+           return ResponseEntity.ok(devotee);
+       } else {
+           // Return 404 Not Found if no record exists with this mobile number
+           return ResponseEntity.ok(null);
+       }
+   }
 }
