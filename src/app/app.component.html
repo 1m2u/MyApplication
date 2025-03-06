@@ -18,18 +18,21 @@
     
       <div class="phoneNo">
         <label for="phoneNo">Mobile No <span class="mandatory-star">*</span></label>
-        <input id="phoneNo" class="input-box" type="tel" name="phoneNo" placeholder="PhoneNo" ngModel required pattern="[0-9]{10}" maxlength="10" numbersOnly>
+        <input id="phoneNo" class="input-box" type="tel" name="phoneNo" placeholder="PhoneNo" [(ngModel)]="formData.phoneNo" required pattern="[0-9]{10}" maxlength="10" (blur)="fetchFormDetails(formData.phoneNo)">
       </div>
     
-     <div class="firstName">
+      <div class="firstName">
         <label for="firstName">First Name <span class="mandatory-star">*</span></label>
-        <input id="firstName" class="input-box" type="text" name="First Name" placeholder="First Name" ngModel required>
-     </div>
-    
-     <div class="lastName">
+        <input id="firstName" class="input-box" type="text" name="firstName" placeholder="First Name" 
+               style="text-transform: capitalize;" 
+               [(ngModel)]="formData.firstName" required>
+    </div>
+    <div class="lastName">
         <label for="lastName">Last Name <span class="mandatory-star">*</span></label>
-        <input id="lastName" class="input-box" type="text" name="Last Name" placeholder="Last Name" ngModel required>
-     </div>
+        <input id="lastName" class="input-box" type="text" name="lastName" placeholder="Last Name" 
+               style="text-transform: capitalize;" 
+               [(ngModel)]="formData.lastName" required>
+    </div>
     
     </div>
 
@@ -37,17 +40,17 @@
     <div class="address-container">
       <div class="addressLine1">
           <label for="addressLine1">Address Line 1 <span class="mandatory-star">*</span></label>
-          <input id="addressLine1" class="input-box" type="text" name="Address Line 1" placeholder="Address Line 1" ngModel required>
+          <input id="addressLine1" class="input-box" type="text" name="addressLine1" placeholder="Address Line 1" [(ngModel)]="formData.addressLine1" required>
       </div>
   
       <div class="addressLine2">
           <label for="addressLine2">Address Line 2 <span class="mandatory-star">*</span></label>
-          <input id="addressLine2" class="input-box" type="text" name="Address Line 2" placeholder="Address Line 2" ngModel required>
+          <input id="addressLine2" class="input-box" type="text" name="addressLine2" placeholder="Address Line 2" [(ngModel)]="formData.addressLine2" required>
       </div>
   
       <div class="occasion">
           <label for="occasion">Occasion <span class="mandatory-star">*</span></label>
-          <select id="occasion" class="input-box" name="Occasion" ngModel required>
+          <select id="occasion" class="input-box" name="occasion" [(ngModel)]="formData.occasion" required>
             <option value="" disabled selected>Select Occasion</option>
             <option *ngFor="let occasion of occasions" [value]="occasion">{{ occasion }}</option>
           </select>
@@ -55,7 +58,7 @@
   
       <div class="gotram">
           <label for="gotram">Gotram <span class="mandatory-star">*</span></label>
-          <select id="gotram" class="input-box" name="gotram" ngModel required>
+          <select id="gotram" class="input-box" name="gotram" [(ngModel)]="formData.gotram" required>
             <option value="" disabled selected>Select Gotram</option>
             <option *ngFor="let gotram of gotrams" [value]="gotram">{{ gotram }}</option>
           </select>
@@ -66,7 +69,7 @@
     <div class="gotram-nakshtram-raasi">
       <div class="nakshtram">
         <label for="nakshtram">Nakshtram <span class="mandatory-star">*</span></label>
-        <select id="nakshtram" class="input-box" name="nakshtram" ngModel required>
+        <select id="nakshtram" class="input-box" name="nakshtram" [(ngModel)]="formData.nakshtram" required>
             <option value="" disabled selected>Select Nakshtram</option>
             <option *ngFor="let nakshtram of nakshtrams" [value]="nakshtram">{{ nakshtram }}</option>
         </select>
@@ -74,7 +77,7 @@
 
       <div class="raasi">
         <label for="raasi">Raasi <span class="mandatory-star">*</span></label>
-        <select id="raasi" class="input-box" name="raasi" ngModel required>
+        <select id="raasi" class="input-box" name="raasi" [(ngModel)]="formData.raasi" required>
             <option value="" disabled selected>Select Raasi</option>
             <option *ngFor="let raasi of raasis" [value]="raasi">{{ raasi }}</option>
         </select>
@@ -82,7 +85,7 @@
     
       <div class="modeofpayment">
         <label for="modeofpayment">Mode of Payment <span class="mandatory-star">*</span></label>
-        <select id="modeofpayment" class="input-box" name="Mode" ngModel required>
+        <select id="modeofpayment" class="input-box" name="mode" [(ngModel)]="formData.mode" required>
             <option value="" disabled selected>Select Mode of Payment</option>
             <option *ngFor="let mode of paymentModes" [value]="mode">{{ mode }}</option>
         </select>

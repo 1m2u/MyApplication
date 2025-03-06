@@ -77,4 +77,8 @@ export class AppService {
       responseType: 'blob'
     });
   }
+
+  getFormDetailsByMobileNo(mobileNo: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/mytemple/lookup/${mobileNo}`);
+  }
 }
