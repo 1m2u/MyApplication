@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map,catchError  } from 'rxjs/operators';
 
 export interface Sevadetails {
   sevaCode: string;
@@ -21,6 +21,7 @@ export class AppService {
   // Updated URL to match the error path
   private saveFormDataUrl = this.baseUrl + '/mytemple/sevareceipt';
   private printReceiptUrl = this.baseUrl + '/mytemple/printreceipt';
+  private loginUrl = this.baseUrl + '/mytemple/login';
 
   constructor(private http: HttpClient) { }
 
@@ -80,5 +81,35 @@ export class AppService {
 
   getFormDetailsByMobileNo(mobileNo: string): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/mytemple/lookup/${mobileNo}`);
+  }
+  verifyCredentials(username: string, password: string): Observable<boolean> {
+    const loginData = { username, password };
+
+    return this.http.post<any>(this.baseUrl, loginData, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    }).pipe(
+      catchError((error) => {
+        console.error('Authentication failed', error);
+        throw error; // Re-throw the error to be caught in the component's subscription
+      })
+    );
+  }
+
+  /**
+   * Checks if the user is logged in (based on session or local storage).
+   * @returns A boolean indicating whether the user is logged in.
+   */
+  isLoggedIn(): boolean {
+    return localStorage.getItem('isLoggedIn') === 'true' || sessionStorage.getItem('isLoggedIn') === 'true';
+  }
+
+  /**
+   * Logs the user out by clearing session and local storage.
+   */
+  logout(): void {
+    localStorage.removeItem('isLoggedIn');
+    sessionStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('username');
+    sessionStorage.removeItem('username');
   }
 }

@@ -1,0 +1,237 @@
+/* Container Styling */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #e6f2ff; 
+}
+
+/* Heading Style */
+.heading h1 {
+    font-size: 16px;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    /* margin-bottom: 20px;  */
+}
+.heading h2 {
+    font-size: 14px;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    margin-top: auto;
+    /* margin-bottom: 20px;  */
+}
+.heading h3 {
+    font-size: 12px;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    margin-top: auto;
+    margin-bottom: 20px; 
+}
+
+/* Flex Layout for Form Groups */
+.form-inline, .address-container,.payment-form-inline{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 15px; 
+}
+
+.form-inline div, .address-container div, .payment-form-inline div{
+    flex: 1 1 calc(20% - 15px); /* Adjusted for smaller input boxes */
+    margin-bottom: 15px; /* Added margin between input boxes */
+    margin-right: 15px; /* Added margin-right for spacing between fields */
+}
+
+  .input-box {
+    width: 100%;
+    max-width: 250px; /* Reduced max-width to shrink the input boxes */
+    padding: 8px; /* Reduced padding for smaller input fields */
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px; /* Reduced font size for compactness */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px; /* Standard font size for labels */
+}
+
+/* Button Styling */
+.btn {
+    width: 100%;
+    padding: 8px; /* Reduced padding for the button */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px; /* Adjusted font size for smaller button */
+    text-transform: uppercase;
+}
+
+.btn:disabled {
+    background-color: #ccc;
+}
+
+/* Styling for Seva Details Table Container */
+.seva-details {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    font-size: 12px; /* Reduced font size for Seva Details */
+}
+
+/* Table Container and Layout */
+.table-container {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.table-container th, .table-container td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px; /* Reduced font size for table */
+}
+
+/* Table Header Styling */
+.table-container th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+.table-container td {
+    background-color: #f9f9f9;
+}
+
+.table-container .input-box {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px; /* Reduced font size for input fields in table */
+}
+
+.table-container input[type="number"] {
+    width: 70%; /* Adjust number input width for consistency */
+}
+
+.table-container .fetch-btn {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.table-container .fetch-btn:disabled {
+    background-color: #ccc;
+}
+.total label {
+    margin-left: -40px;  /* Move the label slightly to the left */
+  }
+
+  .seva-details .form-inline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: #e8f5e9; */
+}
+
+.seva-details .form-inline div {
+    flex: 1 1 calc(16% - 10px); /* Adjusted to fit 5 fields in one row */
+    margin-right: 15px; /* Added space between fields */
+}
+.mandatory-star {
+    color: red;         /* Red color for the star */
+    font-weight: bold;  /* Make the star bold */
+  }
+.seva-details .form-inline div:last-child {
+    margin-right: 0; /* Remove right margin from the last item */
+}
+.hide-header {
+    display: none;
+}
+.add-remove-buttons {
+    display: flex;
+    justify-content: flex-start; /* Align buttons to the left or center */
+    gap: 10px; /* Space between + and - buttons */
+    margin-top: 10px; /* Add space above buttons */
+}
+
+/* Style for the Add and Remove Buttons */
+.add-remove-buttons button {
+    padding: 8px 15px;
+    font-size: 14px; /* Reduced font size for buttons */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Style for the Remove (-) Button */
+.remove-button button {
+    background-color: #e74c3c; /* Red color for the remove button */
+}
+
+/* Add button + with green color */
+.add-remove-buttons button:nth-child(1) {
+    background-color: #2ecc71; /* Green color for add button */
+}
+/* Additional CSS for Grand Total */
+.grand-total-row {
+    margin-top: 15px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+  }
+  
+  .text-right {
+    text-align: right;
+    padding-right: 10px;
+    font-weight: bold;
+  }
+  
+  .grand-total {
+    font-weight: bold;
+    background-color: #f8f9fa;
+    border: 2px solid #6c757d;
+  }
+@media (max-width: 768px) {
+    .form-inline div, .address-container div{
+        flex: 1 1 100%; /* Full-width for smaller screens */
+        margin-bottom: 15px; /* Adjusted spacing for mobile */
+    }
+
+    .table-container th, .table-container td {
+        font-size: 14px; /* Slightly smaller font size on mobile */
+        padding: 10px;
+    }
+
+    .table-container input[type="number"] {
+        width: 60%; /* Adjust number input width for small screens */
+    }
+
+    .btn {
+        font-size: 14px; /* Reduce button font size on smaller screens */
+        padding: 8px;
+    }
+
+    .add-remove-buttons {
+        flex-direction: column; /* Stack buttons vertically on small screens */
+        align-items: center;
+    }
+}
