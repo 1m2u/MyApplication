@@ -36,20 +36,26 @@ public class SevaReceiptDetails {
    @Column(name="address_line2")
    private String address_line2;
    
-   @Column(name="occasion")
-   private String occasion;
-   
+//   @Column(name="occasion")
+//   private String occasion;
+//   
    @Column(name="gotram")
    private String gotram;
    
    @Column(name="nakshtram")
    private String nakshtram;
    
-   @Column(name="raasi")
-   private String raasi;
+//   @Column(name="raasi")
+//   private String raasi;
    
    @Column(name="payment_mode")
    private String payment_mode;
+   
+   @Column(name="check_no")
+   private String check_no;
+   
+   @Column(name="check_date")
+   private String check_date;
    
    @Column(name="seva_name")
    private String seva_name;
@@ -60,11 +66,29 @@ public class SevaReceiptDetails {
    @Column(name="amount")
    private String amount;
 
+public String getCheck_no() {
+	return check_no;
+}
+
+public void setCheck_no(String check_no) {
+	this.check_no = check_no;
+}
+
+public String getCheck_date() {
+	return check_date;
+}
+
+public void setCheck_date(String check_date) {
+	this.check_date = check_date;
+}
+
 public SevaReceiptDetails() {}
 
-public SevaReceiptDetails(int id, String receipt_no, String mobile_no, String first_name, String last_name,
-		String address_line1, String address_line2, String occasion, String gotram, String nakshtram, String raasi,
-		String payment_mode, String seva_name, String seva_date, String amount) {
+
+
+public SevaReceiptDetails(Integer id, String receipt_no, String mobile_no, String first_name, String last_name,
+		String address_line1, String address_line2, String gotram, String nakshtram, String payment_mode,
+		String check_no, String check_date, String seva_name, String seva_date, String amount) {
 	super();
 	this.id = id;
 	this.receipt_no = receipt_no;
@@ -73,11 +97,11 @@ public SevaReceiptDetails(int id, String receipt_no, String mobile_no, String fi
 	this.last_name = last_name;
 	this.address_line1 = address_line1;
 	this.address_line2 = address_line2;
-	this.occasion = occasion;
 	this.gotram = gotram;
 	this.nakshtram = nakshtram;
-	this.raasi = raasi;
 	this.payment_mode = payment_mode;
+	this.check_no = check_no;
+	this.check_date = check_date;
 	this.seva_name = seva_name;
 	this.seva_date = seva_date;
 	this.amount = amount;
@@ -139,13 +163,13 @@ public void setAddress_line2(String address_line2) {
 	this.address_line2 = address_line2;
 }
 
-public String getOccasion() {
-	return occasion;
-}
-
-public void setOccasion(String occasion) {
-	this.occasion = occasion;
-}
+//public String getOccasion() {
+//	return occasion;
+//}
+//
+//public void setOccasion(String occasion) {
+//	this.occasion = occasion;
+//}
 
 public String getGotram() {
 	return gotram;
@@ -163,13 +187,13 @@ public void setNakshtram(String nakshtram) {
 	this.nakshtram = nakshtram;
 }
 
-public String getRaasi() {
-	return raasi;
-}
-
-public void setRaasi(String raasi) {
-	this.raasi = raasi;
-}
+//public String getRaasi() {
+//	return raasi;
+//}
+//
+//public void setRaasi(String raasi) {
+//	this.raasi = raasi;
+//}
 
 public String getPayment_mode() {
 	return payment_mode;

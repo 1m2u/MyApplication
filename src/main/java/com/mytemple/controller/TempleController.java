@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mytemple.entity.GotramNameDTO;
+import com.mytemple.entity.LoginRequest;
 import com.mytemple.entity.Occasion;
 import com.mytemple.entity.SevaDetails;
 import com.mytemple.entity.SevaReceiptDetails;
-import com.mytemple.repository.SevaReceiptDetailsRepository;
+import com.mytemple.service.AuthService;
 import com.mytemple.service.GotramService;
 import com.mytemple.service.OccasionService;
 import com.mytemple.service.SevaDetailsService;
@@ -36,9 +37,29 @@ public class TempleController {
 	private SevaDetailsService sevaDetailsService;
 	@Autowired
 	private SevaReceiptDetailsService sevaReceiptDetailsService;
-	 @Autowired
-	private SevaReceiptDetailsRepository SevaReceiptDetailsRepository;
+	@Autowired
+    private AuthService authService;
 
+
+//	    @PostMapping("/login")
+//	    public String login(@RequestBody Map<String, String> payload) {
+//	        String userid = payload.get("userid");
+//	        String password = payload.get("password");
+//
+//	        return userRepository.findByUseridAndPassword(userid, password)
+//	                .map(user -> "Login successful")
+//	                .orElse("Invalid credentials");
+//	    }
+//	    
+	 
+    @PostMapping("/login")
+    public boolean verifyUser(@RequestBody Map<String, String> request) {
+        String userid = request.get("email");
+        String password = request.get("password");
+//        System.out.println("userid: "+userid);
+//        System.out.println("password: "+password);
+        return authService.checkUser(userid, password);
+    }
     @GetMapping("/gotrams")
     public List<GotramNameDTO> getGotramName() {
         return gotramService.getGotramName();
