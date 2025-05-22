@@ -1,4 +1,4 @@
-import { Component,OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppService } from '../app.service';
@@ -21,22 +21,54 @@ interface SevaDetail {
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './form.component.html',
-  styleUrl: './form.component.css'
+  styleUrl: './form.component.css',
 })
 export class SevaFormComponent implements OnInit {
   paymentModes: string[] = ['UPI', 'CASH', 'CARD', 'CHEQUE'];
-  
+
   nakshtrams: string[] = [
-    'Ashwini', 'Bharani', 'Krittika', 'Rohini', 'Mrigashira',
-    'Ardra', 'Punarvasu', 'Pushya', 'Ashlesha', 'Magha', 'Purva Phalguni', 
-    'Uttara Phalguni', 'Hasta', 'Chitra', 'Swati', 'Vishakha', 'Anuradha',
-    'Jyeshtha', 'Mula', 'Purva Ashadha', 'Uttara Ashadha', 'Shravana', 'Dhanishta',
-    'Shatabhisha', 'Purva Bhadrapada', 'Uttara Bhadrapada', 'Revati'
+    'Ashwini',
+    'Bharani',
+    'Krittika',
+    'Rohini',
+    'Mrigashira',
+    'Ardra',
+    'Punarvasu',
+    'Pushya',
+    'Ashlesha',
+    'Magha',
+    'Purva Phalguni',
+    'Uttara Phalguni',
+    'Hasta',
+    'Chitra',
+    'Swati',
+    'Vishakha',
+    'Anuradha',
+    'Jyeshtha',
+    'Mula',
+    'Purva Ashadha',
+    'Uttara Ashadha',
+    'Shravana',
+    'Dhanishta',
+    'Shatabhisha',
+    'Purva Bhadrapada',
+    'Uttara Bhadrapada',
+    'Revati',
   ];
 
   raasis: string[] = [
-    'Mesha', 'Vrishabha', 'Mithuna', 'Karka', 'Simha', 
-    'Kanya', 'Tula', 'Vrischika', 'Dhanu', 'Makara', 'Kumbha', 'Meena'
+    'Mesha',
+    'Vrishabha',
+    'Mithuna',
+    'Karka',
+    'Simha',
+    'Kanya',
+    'Tula',
+    'Vrischika',
+    'Dhanu',
+    'Makara',
+    'Kumbha',
+    'Meena',
   ];
   receiptNo: string = '';
   occasions: string[] = [];
@@ -57,9 +89,11 @@ export class SevaFormComponent implements OnInit {
     gotram: '',
     nakshtram: '',
     raasi: '',
-    mode: ''
+    mode: '',
+    check_no: '',
+    check_date: '',
   };
-  
+
   constructor(private appService: AppService) {}
 
   ngOnInit() {
@@ -80,8 +114,8 @@ export class SevaFormComponent implements OnInit {
   getReceiptNo(): void {
     this.appService.getLatestReceiptNumber().subscribe(
       (response: any) => {
-        console.log("Receipt No:", response.receiptNo); 
-        this.receiptNo = response.receiptNo; 
+        console.log('Receipt No:', response.receiptNo);
+        this.receiptNo = response.receiptNo;
       },
       (error) => {
         console.error('Error fetching receipt number:', error);
@@ -89,7 +123,7 @@ export class SevaFormComponent implements OnInit {
       }
     );
   }
-  
+
   loadGotrams() {
     this.appService.getGotrams().subscribe({
       next: (data) => {
@@ -98,7 +132,7 @@ export class SevaFormComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error fetching gotrams:', error);
-      }
+      },
     });
   }
 
@@ -109,7 +143,7 @@ export class SevaFormComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error fetching occasions:', error);
-      }
+      },
     });
   }
 
@@ -122,20 +156,22 @@ export class SevaFormComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error fetching seva details:', error);
-      }
+      },
     });
   }
 
   onSevaNameChange(event: any, index: number): void {
     const selectedSevaName = event?.target?.value || event;
-    const selectedSeva = this.sevas.find((seva) => seva.sevaName === selectedSevaName);
+    const selectedSeva = this.sevas.find(
+      (seva) => seva.sevaName === selectedSevaName
+    );
 
     if (selectedSeva) {
       this.sevaDetailsArray[index] = {
         ...this.sevaDetailsArray[index],
         sevaCode: selectedSeva.sevaCode,
         sevaName: selectedSeva.sevaName,
-        amount: selectedSeva.amount
+        amount: selectedSeva.amount,
       };
       this.calculateGrandTotal();
     }
@@ -146,7 +182,7 @@ export class SevaFormComponent implements OnInit {
       sevaCode: '',
       sevaName: '',
       amount: 0,
-      sevaDate: undefined
+      sevaDate: undefined,
     };
     this.sevaDetailsArray.push(newSevaDetail);
     this.calculateGrandTotal();
@@ -161,14 +197,14 @@ export class SevaFormComponent implements OnInit {
 
   calculateGrandTotal(): void {
     this.grandTotal = this.sevaDetailsArray.reduce(
-      (sum, detail) => sum + (detail.amount || 0), 
+      (sum, detail) => sum + (detail.amount || 0),
       0
     );
   }
-  
+
   onClickSubmit(formValue: any): void {
     this.submitted = true;
-  
+
     // Prepare the data for multiple sevas
     const formData = this.sevaDetailsArray.map((seva, index) => ({
       receipt_no: this.receiptNo,
@@ -182,15 +218,17 @@ export class SevaFormComponent implements OnInit {
       nakshtram: formValue.nakshtram,
       raasi: formValue.raasi,
       payment_mode: formValue.mode,
+      check_no: formValue.check_no,
+      check_date: formValue.check_date,
       seva_name: seva.sevaName,
       seva_date: seva.sevaDate,
-      amount: seva.amount
+      amount: seva.amount,
     }));
-    
+
     console.log('formData--', formData);
-    
+
     this.appService.submitMultipleSevaData(formData).subscribe({
-      next: (response) => { 
+      next: (response) => {
         console.log('Form saved successfully:', response);
         alert('Form submitted successfully!');
         this.printSevaDetails(formData);
@@ -200,24 +238,24 @@ export class SevaFormComponent implements OnInit {
       error: (error) => {
         console.error('Error saving form:', error);
         alert('Error submitting form. Please try again.');
-      }
+      },
     });
   }
-  
+
   hardReset(): void {
     window.location.reload();
   }
-  
+
   fetchFormDetails(mobileNo: string): void {
     this.appService.getFormDetailsByMobileNo(mobileNo).subscribe(
-      data => {
+      (data) => {
         if (data) {
           this.patchFormValues(data);
         } else {
           console.log('No data found, please enter details manually.');
         }
       },
-      error => {
+      (error) => {
         console.error('Error fetching form details:', error);
       }
     );
@@ -234,19 +272,21 @@ export class SevaFormComponent implements OnInit {
       gotram: data.gotram,
       nakshtram: data.nakshtram,
       raasi: data.raasi,
-      mode: data.payment_mode
+      mode: data.payment_mode,
+      check_no: data.check_no,
+      check_date: data.check_date,
     };
   }
-  
+
   printSevaDetails(formData: any[]): void {
     // Create a new window for printing
     const printWindow = window.open('', '_blank', 'width=600,height=800');
-    
+
     if (!printWindow) {
       alert('Please disable pop-up blocker to print the receipt');
       return;
     }
-      const printContent = `
+    const printContent = `
       <html>
         <head>
           <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
@@ -389,7 +429,9 @@ export class SevaFormComponent implements OnInit {
                 </div>
                 <div class="detail-item">
                   <span class="detail-label">Name:</span>
-                  <span class="detail-value">${formData[0].first_name} ${formData[0].last_name}</span>
+                  <span class="detail-value">${formData[0].first_name} ${
+      formData[0].last_name
+    }</span>
                 </div>
                 <div class="detail-item">
                   <span class="detail-label">Mobile:</span>
@@ -397,7 +439,9 @@ export class SevaFormComponent implements OnInit {
                 </div>
                 <div class="detail-item full-width-item">
                   <span class="detail-label">Address:</span>
-                  <span class="detail-value">${formData[0].address_line1}, ${formData[0].address_line2}</span>
+                  <span class="detail-value">${formData[0].address_line1}, ${
+      formData[0].address_line2
+    }</span>
                 </div>
                 <div class="detail-item">
                   <span class="detail-label">Occasion:</span>
@@ -435,18 +479,30 @@ export class SevaFormComponent implements OnInit {
                   </tr>
                 </thead>
                 <tbody>
-                  ${formData.map(seva => `
+                  ${formData
+                    .map(
+                      (seva) => `
                     <tr>
                       <td>${seva.seva_name}</td>
-                      <td>${seva.seva_date ? new Date(seva.seva_date).toLocaleDateString() : 'N/A'}</td>
-                      <td style="text-align: right;">₹${seva.amount.toFixed(2)}</td>
+                      <td>${
+                        seva.seva_date
+                          ? new Date(seva.seva_date).toLocaleDateString()
+                          : 'N/A'
+                      }</td>
+                      <td style="text-align: right;">₹${seva.amount.toFixed(
+                        2
+                      )}</td>
                     </tr>
-                  `).join('')}
+                  `
+                    )
+                    .join('')}
                 </tbody>
                 <tfoot>
                   <tr class="total-row">
                     <td colspan="2">Total Amount</td>
-                    <td style="text-align: right;">₹${this.grandTotal.toFixed(2)}</td>
+                    <td style="text-align: right;">₹${this.grandTotal.toFixed(
+                      2
+                    )}</td>
                   </tr>
                 </tfoot>
               </table>
@@ -459,13 +515,13 @@ export class SevaFormComponent implements OnInit {
         </body>
       </html>
     `;
-  
+
     // Write the content to the new window
     printWindow.document.write(printContent);
-    
+
     // Close the document writing
     printWindow.document.close();
-    
+
     // Trigger print
     printWindow.print();
   }

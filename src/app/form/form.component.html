@@ -1,163 +1,309 @@
 <!-- form.component.html -->
 <div class="container">
-    <div class="heading">
-      <h1>SRI SRINGERI JAGADGURU MAHASAMSTHANM</h1>
-      <h2>SRI SHANKARA MATHAM, MOTI NAGAR</h2>
-      <h3>HYDERABAD PH.NO. 040-23833837</h3>
-    </div>
-  
-    <!-- Start of the Form -->
-    <form #userForm="ngForm" (ngSubmit)="onClickSubmit(userForm.value)">
-      
-      <!-- Mode, Receipt No, Date, Seva Date Group -->
-      <div class="form-inline">
-  
-        <div class="receiptNo">
-          <label for="receiptNo">Receipt No</label>
-          <input id="receiptNo" class="input-box" type="text" name="receiptNo" placeholder="Receipt No" [(ngModel)]="receiptNo" required readonly>
-       </div>    
-      
-        <div class="phoneNo">
-          <label for="phoneNo">Mobile No <span class="mandatory-star">*</span></label>
-          <input id="phoneNo" class="input-box" type="tel" name="phoneNo" placeholder="PhoneNo" [(ngModel)]="formData.phoneNo" required pattern="[0-9]{10}" maxlength="10" (blur)="fetchFormDetails(formData.phoneNo)">
-        </div>
-      
-        <div class="firstName">
-          <label for="firstName">First Name <span class="mandatory-star">*</span></label>
-          <input id="firstName" class="input-box" type="text" name="firstName" placeholder="First Name" 
-                 style="text-transform: capitalize;" 
-                 [(ngModel)]="formData.firstName" required>
+  <div class="heading">
+    <h1>SRI SRINGERI JAGADGURU MAHASAMSTHANM</h1>
+    <h2>SRI SHANKARA MATHAM, MOTI NAGAR</h2>
+    <h3>HYDERABAD PH.NO. 040-23833837</h3>
+  </div>
+
+  <!-- Start of the Form -->
+  <form #userForm="ngForm" (ngSubmit)="onClickSubmit(userForm.value)">
+    <!-- Mode, Receipt No, Date, Seva Date Group -->
+    <div class="form-inline">
+      <div class="receiptNo">
+        <label for="receiptNo">Receipt No</label>
+        <input
+          id="receiptNo"
+          class="input-box"
+          type="text"
+          name="receiptNo"
+          placeholder="Receipt No"
+          [(ngModel)]="receiptNo"
+          required
+          readonly
+        />
+      </div>
+
+      <div class="phoneNo">
+        <label for="phoneNo"
+          >Mobile No <span class="mandatory-star">*</span></label
+        >
+        <input
+          id="phoneNo"
+          class="input-box"
+          type="tel"
+          name="phoneNo"
+          placeholder="PhoneNo"
+          [(ngModel)]="formData.phoneNo"
+          required
+          pattern="[0-9]{10}"
+          maxlength="10"
+          (blur)="fetchFormDetails(formData.phoneNo)"
+        />
+      </div>
+
+      <div class="firstName">
+        <label for="firstName"
+          >First Name <span class="mandatory-star">*</span></label
+        >
+        <input
+          id="firstName"
+          class="input-box"
+          type="text"
+          name="firstName"
+          placeholder="First Name"
+          style="text-transform: capitalize"
+          [(ngModel)]="formData.firstName"
+          required
+        />
       </div>
       <div class="lastName">
-          <label for="lastName">Last Name <span class="mandatory-star">*</span></label>
-          <input id="lastName" class="input-box" type="text" name="lastName" placeholder="Last Name" 
-                 style="text-transform: capitalize;" 
-                 [(ngModel)]="formData.lastName" required>
+        <label for="lastName"
+          >Last Name <span class="mandatory-star">*</span></label
+        >
+        <input
+          id="lastName"
+          class="input-box"
+          type="text"
+          name="lastName"
+          placeholder="Last Name"
+          style="text-transform: capitalize"
+          [(ngModel)]="formData.lastName"
+          required
+        />
       </div>
-      
+    </div>
+
+    <!-- Address and Contact Details Group -->
+    <div class="address-container">
+      <div class="addressLine1">
+        <label for="addressLine1"
+          >Address Line 1 <span class="mandatory-star">*</span></label
+        >
+        <input
+          id="addressLine1"
+          class="input-box"
+          type="text"
+          name="addressLine1"
+          placeholder="Address Line 1"
+          [(ngModel)]="formData.addressLine1"
+          required
+        />
       </div>
-  
-      <!-- Address and Contact Details Group -->
-      <div class="address-container">
-        <div class="addressLine1">
-            <label for="addressLine1">Address Line 1 <span class="mandatory-star">*</span></label>
-            <input id="addressLine1" class="input-box" type="text" name="addressLine1" placeholder="Address Line 1" [(ngModel)]="formData.addressLine1" required>
-        </div>
-    
-        <div class="addressLine2">
-            <label for="addressLine2">Address Line 2 <span class="mandatory-star">*</span></label>
-            <input id="addressLine2" class="input-box" type="text" name="addressLine2" placeholder="Address Line 2" [(ngModel)]="formData.addressLine2" required>
-        </div>
-    
-        <!-- <div class="occasion">
+
+      <div class="addressLine2">
+        <label for="addressLine2"
+          >Address Line 2 <span class="mandatory-star">*</span></label
+        >
+        <input
+          id="addressLine2"
+          class="input-box"
+          type="text"
+          name="addressLine2"
+          placeholder="Address Line 2"
+          [(ngModel)]="formData.addressLine2"
+          required
+        />
+      </div>
+
+      <!-- <div class="occasion">
             <label for="occasion">Occasion <span class="mandatory-star">*</span></label>
             <select id="occasion" class="input-box" name="occasion" [(ngModel)]="formData.occasion" required>
               <option value="" disabled selected>Select Occasion</option>
               <option *ngFor="let occasion of occasions" [value]="occasion">{{ occasion }}</option>
             </select>
         </div> -->
-    
-        <div class="gotram">
-            <label for="gotram">Gotram <span class="mandatory-star">*</span></label>
-            <select id="gotram" class="input-box" name="gotram" [(ngModel)]="formData.gotram" required>
-              <option value="" disabled selected>Select Gotram</option>
-              <option *ngFor="let gotram of gotrams" [value]="gotram">{{ gotram }}</option>
-            </select>
-        </div>
 
-        <div class="nakshtram">
-            <label for="nakshtram">Nakshtram <span class="mandatory-star">*</span></label>
-            <select id="nakshtram" class="input-box" name="nakshtram" [(ngModel)]="formData.nakshtram" required>
-                <option value="" disabled selected>Select Nakshtram</option>
-                <option *ngFor="let nakshtram of nakshtrams" [value]="nakshtram">{{ nakshtram }}</option>
-            </select>
-         </div>   
-    </div>
-    
-    <div class="payment-form-inline">
-      <div class="form-group">
-        <label for="paymentoption">Mode of Payment <span class="mandatory-star">*</span></label>
-        <select id="paymentoption" class="input-box" name="mode" [(ngModel)]="formData.mode" required>
-          <option value="" disabled selected>Select Mode of Payment</option>
-          <option *ngFor="let mode of paymentModes" [value]="mode">{{ mode }}</option>
+      <div class="gotram">
+        <label for="gotram">Gotram <span class="mandatory-star">*</span></label>
+        <select
+          id="gotram"
+          class="input-box"
+          name="gotram"
+          [(ngModel)]="formData.gotram"
+          required
+        >
+          <option value="" disabled selected>Select Gotram</option>
+          <option *ngFor="let gotram of gotrams" [value]="gotram">
+            {{ gotram }}
+          </option>
         </select>
       </div>
-    
-      <div *ngIf="formData.mode === 'CHEQUE'" class="form-group cheque-number">
-        <label for="chequeNumber">Cheque Number <span class="mandatory-star">*</span></label>
-        <input type="text" id="chequeNumber" class="input-box" name="chequeNumber" [(ngModel)]="formData.chequeNumber" required>
+
+      <div class="nakshtram">
+        <label for="nakshtram"
+          >Nakshtram <span class="mandatory-star">*</span></label
+        >
+        <select
+          id="nakshtram"
+          class="input-box"
+          name="nakshtram"
+          [(ngModel)]="formData.nakshtram"
+          required
+        >
+          <option value="" disabled selected>Select Nakshtram</option>
+          <option *ngFor="let nakshtram of nakshtrams" [value]="nakshtram">
+            {{ nakshtram }}
+          </option>
+        </select>
       </div>
-    
+    </div>
+
+    <div class="payment-form-inline">
+      <div class="form-group">
+        <label for="paymentoption"
+          >Mode of Payment <span class="mandatory-star">*</span></label
+        >
+        <select
+          id="paymentoption"
+          class="input-box"
+          name="mode"
+          [(ngModel)]="formData.mode"
+          required
+        >
+          <option value="" disabled selected>Select Mode of Payment</option>
+          <option *ngFor="let mode of paymentModes" [value]="mode">
+            {{ mode }}
+          </option>
+        </select>
+      </div>
+
+      <div *ngIf="formData.mode === 'CHEQUE'" class="form-group cheque-number">
+        <label for="check_no"
+          >Cheque Number <span class="mandatory-star">*</span></label
+        >
+        <input
+          type="text"
+          id="check_no"
+          class="input-box"
+          name="check_no"
+          [(ngModel)]="formData.check_no"
+          required
+        />
+      </div>
+
       <div *ngIf="formData.mode === 'CHEQUE'" class="form-group cheque-date">
-        <label for="chequeDate">Cheque Date <span class="mandatory-star">*</span></label>
-        <input type="date" id="chequeDate" class="input-box" name="chequeDate" [(ngModel)]="formData.chequeDate" required>
+        <label for="check_date"
+          >Cheque Date <span class="mandatory-star">*</span></label
+        >
+        <input
+          type="date"
+          id="check_date"
+          class="input-box"
+          name="check_date"
+          [(ngModel)]="formData.check_date"
+          required
+        />
       </div>
       <div></div>
     </div>
-  
-     <!-- Seva Details Group -->
-      <div class="seva-details">
-        <!-- Static Headers Row (Only once) -->
-        <div class="form-inline">
-          <div class="sevaName">
-            <label for="sevaName">Seva Name <span class="mandatory-star">*</span></label>
-          </div>
-          <div class="date">
-            <label for="date">Seva Date <span class="mandatory-star">*</span></label>
-          </div>
-          <div class="total">
-            <label for="total">Total Amount</label>
-          </div>
+
+    <!-- Seva Details Group -->
+    <div class="seva-details">
+      <!-- Static Headers Row (Only once) -->
+      <div class="form-inline">
+        <div class="sevaName">
+          <label for="sevaName"
+            >Seva Name <span class="mandatory-star">*</span></label
+          >
         </div>
-  
-        <!-- Dynamic Rows (Only input fields) -->
-        <div class="form-inline" *ngFor="let sevaDetail of sevaDetailsArray; let i = index">
-          <div class="sevaName">
-            <select id="sevaName{{i}}" class="input-box" name="sevaName{{i}}" 
-                    [(ngModel)]="sevaDetail.sevaName" 
-                    (ngModelChange)="onSevaNameChange($event, i)" required>
-              <option value="" disabled selected>Select Seva Name</option>
-              <option *ngFor="let seva of sevas" [value]="seva.sevaName">{{ seva.sevaName }}</option>
-            </select>
-          </div>
-  
-          <div class="date">
-            <input id="date{{i}}" class="input-box" type="date" name="date{{i}}" 
-                   [(ngModel)]="sevaDetail.sevaDate" required>
-          </div>
-  
-          <div class="total">
-            <input id="total{{i}}" class="input-box" type="number" name="total{{i}}" 
-                  [(ngModel)]="sevaDetail.amount" readonly>
-          </div>
-  
-          <!-- Add/Remove Buttons -->
-          <div class="add-remove-buttons">
-            <button type="button" class="add-button" (click)="addSevaDetail()">+</button>
-            <button type="button" class="remove-button" (click)="removeSevaDetail(i)" 
-                    [disabled]="sevaDetailsArray.length <= 1">-</button>
-          </div>
+        <div class="date">
+          <label for="date"
+            >Seva Date <span class="mandatory-star">*</span></label
+          >
         </div>
-  
-        <!-- Grand Total Row -->
-        <div class="form-inline grand-total-row">
-          <div class="sevaName">
-            <!-- Empty cell for alignment -->
-          </div>
-          <div class="date text-right">
-            <strong>Grand Total:</strong>
-          </div>
-          <div class="total">
-            <input id="grandTotal" class="input-box grand-total" type="number" 
-                  [value]="grandTotal" readonly>
-          </div>
-          <div class="add-remove-buttons">
-            <!-- Empty cell for alignment -->
-          </div>
+        <div class="total">
+          <label for="total">Total Amount</label>
         </div>
       </div>
-  
-      <input class="btn" type="submit" value="Save & Print" [disabled]="!userForm.valid">
-  
-    </form>
-  </div>
+
+      <!-- Dynamic Rows (Only input fields) -->
+      <div
+        class="form-inline"
+        *ngFor="let sevaDetail of sevaDetailsArray; let i = index"
+      >
+        <div class="sevaName">
+          <select
+            id="sevaName{{ i }}"
+            class="input-box"
+            name="sevaName{{ i }}"
+            [(ngModel)]="sevaDetail.sevaName"
+            (ngModelChange)="onSevaNameChange($event, i)"
+            required
+          >
+            <option value="" disabled selected>Select Seva Name</option>
+            <option *ngFor="let seva of sevas" [value]="seva.sevaName">
+              {{ seva.sevaName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="date">
+          <input
+            id="date{{ i }}"
+            class="input-box"
+            type="date"
+            name="date{{ i }}"
+            [(ngModel)]="sevaDetail.sevaDate"
+            required
+          />
+        </div>
+
+        <div class="total">
+          <input
+            id="total{{ i }}"
+            class="input-box"
+            type="number"
+            name="total{{ i }}"
+            [(ngModel)]="sevaDetail.amount"
+            readonly
+          />
+        </div>
+
+        <!-- Add/Remove Buttons -->
+        <div class="add-remove-buttons">
+          <button type="button" class="add-button" (click)="addSevaDetail()">
+            +
+          </button>
+          <button
+            type="button"
+            class="remove-button"
+            (click)="removeSevaDetail(i)"
+            [disabled]="sevaDetailsArray.length <= 1"
+          >
+            -
+          </button>
+        </div>
+      </div>
+
+      <!-- Grand Total Row -->
+      <div class="form-inline grand-total-row">
+        <div class="sevaName">
+          <!-- Empty cell for alignment -->
+        </div>
+        <div class="date text-right">
+          <strong>Grand Total:</strong>
+        </div>
+        <div class="total">
+          <input
+            id="grandTotal"
+            class="input-box grand-total"
+            type="number"
+            [value]="grandTotal"
+            readonly
+          />
+        </div>
+        <div class="add-remove-buttons">
+          <!-- Empty cell for alignment -->
+        </div>
+      </div>
+    </div>
+
+    <input
+      class="btn"
+      type="submit"
+      value="Save & Print"
+      [disabled]="!userForm.valid"
+    />
+  </form>
+</div>

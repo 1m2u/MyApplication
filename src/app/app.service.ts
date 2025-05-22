@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map,catchError  } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 export interface Sevadetails {
   sevaCode: string;
@@ -10,7 +10,7 @@ export interface Sevadetails {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AppService {
   private baseUrl = 'http://localhost:9090';
@@ -23,12 +23,16 @@ export class AppService {
   private printReceiptUrl = this.baseUrl + '/mytemple/printreceipt';
   private loginUrl = this.baseUrl + '/mytemple/login';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getGotrams(): Observable<string[]> {
-    return this.http.get<{ gothramName: string }[]>(this.gotramApiUrl).pipe(
-      map((response: { gothramName: string }[]) => response.map((item: { gothramName: string }) => item.gothramName))
-    );
+    return this.http
+      .get<{ gothramName: string }[]>(this.gotramApiUrl)
+      .pipe(
+        map((response: { gothramName: string }[]) =>
+          response.map((item: { gothramName: string }) => item.gothramName)
+        )
+      );
   }
 
   getOccasions(): Observable<string[]> {
@@ -44,16 +48,16 @@ export class AppService {
   }
 
   submitMultipleSevaData(sevaData: any[]): Observable<any[]> {
-    return new Observable(observer => {
+    return new Observable((observer) => {
       const results: any[] = [];
       let completed = 0;
-  
-      sevaData.forEach(item => {
+
+      sevaData.forEach((item) => {
         this.http.post(this.saveFormDataUrl, item).subscribe({
           next: (result) => {
             results.push(result);
             completed++;
-  
+
             if (completed === sevaData.length) {
               observer.next(results);
               observer.complete();
@@ -62,12 +66,12 @@ export class AppService {
           error: (err) => {
             results.push({ success: false, error: err, item });
             completed++;
-  
+
             if (completed === sevaData.length) {
               observer.next(results);
               observer.complete();
             }
-          }
+          },
         });
       });
     });
@@ -75,7 +79,7 @@ export class AppService {
   // If you want to add the print receipt functionality:
   printReceipt(receiptNo: string): Observable<Blob> {
     return this.http.get(`${this.printReceiptUrl}/${receiptNo}`, {
-      responseType: 'blob'
+      responseType: 'blob',
     });
   }
 
@@ -85,14 +89,16 @@ export class AppService {
   verifyCredentials(username: string, password: string): Observable<boolean> {
     const loginData = { username, password };
 
-    return this.http.post<any>(this.baseUrl, loginData, {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    }).pipe(
-      catchError((error) => {
-        console.error('Authentication failed', error);
-        throw error; // Re-throw the error to be caught in the component's subscription
+    return this.http
+      .post<any>(this.baseUrl, loginData, {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       })
-    );
+      .pipe(
+        catchError((error) => {
+          console.error('Authentication failed', error);
+          throw error; // Re-throw the error to be caught in the component's subscription
+        })
+      );
   }
 
   /**
@@ -100,7 +106,10 @@ export class AppService {
    * @returns A boolean indicating whether the user is logged in.
    */
   isLoggedIn(): boolean {
-    return localStorage.getItem('isLoggedIn') === 'true' || sessionStorage.getItem('isLoggedIn') === 'true';
+    return (
+      localStorage.getItem('isLoggedIn') === 'true' ||
+      sessionStorage.getItem('isLoggedIn') === 'true'
+    );
   }
 
   /**
@@ -111,5 +120,15 @@ export class AppService {
     sessionStorage.removeItem('isLoggedIn');
     localStorage.removeItem('username');
     sessionStorage.removeItem('username');
+  }
+
+  login(email: string, password: string): Observable<boolean> {
+    const loginData = { email, password };
+
+    return this.http.post<boolean>(this.loginUrl, loginData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   }
 }
