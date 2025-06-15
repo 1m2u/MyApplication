@@ -1,0 +1,43 @@
+<!-- src/app/dashboard/dashboard.component.html -->
+<div class="dashboard-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2 class="sidebar-title">Dashboard</h2>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul class="nav-list">
+        <li
+          *ngFor="let item of navItems"
+          class="nav-item"
+          [class.active]="item.active"
+          (click)="onNavItemClick(item)"
+        >
+          <a class="nav-link">
+            <span class="material-icons nav-icon">{{ item.icon }}</span>
+            <span class="nav-label">{{ item.label }}</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-bottom">
+        <div
+          class="settings-item"
+          [class.active]="settingsItem.active"
+          (click)="onSettingsClick()"
+        >
+          <a class="nav-link">
+            <span class="material-icons nav-icon">{{ settingsItem.icon }}</span>
+            <span class="nav-label">{{ settingsItem.label }}</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

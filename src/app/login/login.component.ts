@@ -37,32 +37,6 @@ export class LoginComponent {
     this.showLoginForm = true;
   }
 
-  // onSubmit(): void {
-  //   if (this.loginForm.invalid) {
-  //     return;
-  //   }
-
-  //   this.isSubmitting = true;
-  //   this.errorMessage = '';
-
-  //   // Replace this with your actual authentication service call
-  //   setTimeout(() => {
-  //     // Mock authentication - in real app, call your auth service here
-  //     const { email, password } = this.loginForm.value;
-
-  //     // This is just for demonstration. In a real app, you'd call your auth service
-  //     if (email === 'user@example.com' && password === 'password123') {
-  //       // Save token or user data to localStorage/sessionStorage
-  //       localStorage.setItem('isLoggedIn', 'true');
-  //       this.router.navigate(['/form']);
-  //     } else {
-  //       this.errorMessage = 'Invalid email or password';
-  //     }
-
-  //     this.isSubmitting = false;
-  //   }, 1000); // Simulating network delay
-  // }
-
   onSubmit(): void {
     if (this.loginForm.invalid) return;
 
@@ -70,15 +44,18 @@ export class LoginComponent {
     const { email, password } = this.loginForm.value;
     console.log('Login user:', email);
     console.log('Login password:', password);
+
     this.appService.login(email, password).subscribe({
       next: (response) => {
-        console.log('Login response:', response); // This will be true or false
+        console.log('Login response:', response);
 
         // Since API returns simple boolean, check directly
         if (response === true) {
           localStorage.setItem('isLoggedIn', 'true');
           localStorage.setItem('userid', email); // Optional: store userid
-          this.router.navigate(['/form']);
+
+          // Navigate to dashboard instead of form
+          this.router.navigate(['/dashboard']);
         } else {
           this.errorMessage = 'Invalid userid or password';
         }
